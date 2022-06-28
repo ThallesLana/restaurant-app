@@ -7,6 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="font-bold text-indigo-500 text-5xl border-b-2 pb-2 border-indigo-300">
+                <h1>Categories</h1>
+            </div>
             <div class="flex justify-end m-2 p-2">
                 <a href="{{ route('admin.categories.create') }}"
                     class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
@@ -57,7 +60,7 @@
                                             class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit">Delete</button>
+                                            <button type="submit" id="delete">Delete</button>
                                         </form>
                                     </div>
                                 </td>
