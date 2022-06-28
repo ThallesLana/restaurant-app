@@ -7,7 +7,7 @@
 
     <div class="py-8">
         <div class="pt-2 pr-0 pb-4 pl-1">
-            <a href="{{ route('admin.categories.index') }}"
+            <a href="{{ route('admin.menus.index') }}"
                 class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
                 Return
             </a>
@@ -34,6 +34,15 @@
                         <label for="description"
                             class="block mb-2 text-sm font-medium text-gray-900">Description</label>
                         <textarea name="description" id="description" rows="3" placeholder="Leave a description..." class="block p-2.5 w-full text-sm text-gray-900 bg-slate-50 rounded-lg border-2 border-gray-300 focus:ring-indigo-500"></textarea>
+                    </div>
+                    <div class="sm:col-span-6 pt-5">
+                        <label for="categories" class="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
+                        <select class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
+                            <option selected="">Choose a category</option>
+                            @foreach ($categories as $category)
+                                <option>{{ $category->name }}</option>
+                            @endforeach
+                        </select>
                     </div>
                 </form>
                 <div class="pt-5 pr-2 pb-0 pl-0.5">
