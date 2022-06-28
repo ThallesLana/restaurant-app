@@ -8,7 +8,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="flex justify-end m-2 p-2">
-                <a href="{{ route('admin.categories.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
+                <a href="{{ route('admin.categories.create') }}"
+                    class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
                     New Category
                 </a>
             </div>
@@ -33,14 +34,32 @@
                     <tbody>
                         @foreach ($categories as $category)
                             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                   {{ $category->name }}
+                                <td scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    {{ $category->name }}
                                 </td>
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                  <img src="{{ Storage::url($category->image) }}" class="w-16 h-16 rounded">
+                                <td scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    <img src="{{ Storage::url($category->image) }}" class="w-8 h-8 rounded">
                                 </td>
-                                <td scope="row" class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                   {{ $category->description }}
+                                <td scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    {{ $category->description }}
+                                </td>
+                                <td scope="row"
+                                    class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                    <div class="flex space-x-2">
+                                        <a href="{{ route('admin.categories.edit', $category->id) }}"
+                                            class="px-4 py-2 bg-green-500 hover:bg-green-700 rounded-lg text-white">Edit</a>
+                                        <form action="{{ route('admin.categories.destroy', $category->id) }}"
+                                            method="POST"
+                                            onsubmit="return confirm('Are you sure?');"
+                                            class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit">Delete</button>
+                                        </form>
+                                    </div>
                                 </td>
                             </tr>
                         @endforeach
