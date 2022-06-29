@@ -19,7 +19,7 @@
                         @csrf
                         <!-- Name -->
                         <div class="relative z-0 w-full mb-6 group mt-4">
-                            <input type="text" name="name" id="name"
+                            <input type="text" name="name" id="name" required
                                 class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-500 peer"
                                 placeholder=" " required="">
                             <label for="name"
@@ -28,14 +28,14 @@
                         <!-- Image -->
                         <div>
                             <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Upload Image</label>
-                            <input type="file" id="image" name="image"
+                            <input type="file" id="image" name="image" required
                                 class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-1 cursor-pointer bg-slate-100 focus:outline-none">
                         </div>
                         <!-- Description -->
                         <div class="sm:col-span-6 pt-5">
                             <label for="description"
                                 class="block mb-2 text-sm font-medium text-gray-900">Description</label>
-                            <textarea name="description" id="description" rows="3" placeholder="Leave a description..." class="block p-2.5 w-full text-sm text-gray-900 bg-slate-50 rounded-lg border-2 border-gray-300 focus:ring-indigo-500"></textarea>
+                            <textarea name="description" id="description" rows="3" placeholder="Leave a description..." class="block p-2.5 w-full text-sm text-gray-900 bg-slate-50 rounded-lg border-2 border-gray-300 focus:ring-indigo-500" required></textarea>
                         </div>
                         <div class="pt-5 pr-2 pb-0 pl-0.5 flex justify-between">
                             <a href="{{ route('admin.categories.index') }}"

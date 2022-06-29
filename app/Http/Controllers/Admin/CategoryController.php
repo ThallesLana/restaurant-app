@@ -7,6 +7,7 @@ use App\Http\Requests\CategoryStoreRequest;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
 
 class CategoryController extends Controller
 {
@@ -37,17 +38,24 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(CategoryStoreRequest $request)
+    public function store(CategoryStoreRequest $request, SweetAlertFactory $flasher)
     {
-        $image = $request->file('image')->store('public/categories');
-        // 1:20:02
-        Category::create([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $image
-        ]);
-
-        return redirect()->route('admin.categories.index');
+        try{
+            $image = $request->file('image')->store('public/categories');
+            
+            Category::create([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image' => $image
+            ]);
+    
+            $flasher->addSuccess('Your category has been create!');
+            return redirect()->route('admin.categories.index');    
+        }
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -79,26 +87,33 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Category $category)
+    public function update(Request $request, Category $category, SweetAlertFactory $flasher)
     {
-        $request->validate([
-            'name' => 'required',
-            'description' => 'required'
-        ]);
-        $image = $category->image;
+        try {
+            $request->validate([
+                'name' => 'required',
+                'description' => 'required'
+            ]);
+            $image = $category->image;
+    
+            if($request->hasFile('image')) {
+                Storage::delete($category->image);
+                $image = $request->file('image')->store('public/categories');
+            }
+    
+            $category->update([
+                'name' => $request->name,
+                'description' => $request->description,
+                'image' => $image
+            ]);
 
-        if($request->hasFile('image')) {
-            Storage::delete($category->image);
-            $image = $request->file('image')->store('public/categories');
+            $flasher->addSuccess('Your category has been update!');
+            return redirect()->route('admin.categories.index');
+        } 
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
         }
-
-        $category->update([
-            'name' => $request->name,
-            'description' => $request->description,
-            'image' => $image
-        ]);
-
-        return redirect()->route('admin.categories.index');
     }
 
     /**
@@ -107,11 +122,18 @@ class CategoryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Category $category)
+    public function destroy(Category $category, SweetAlertFactory $flasher)
     {
-        Storage::delete($category->image);
-        $category->delete();
+        try {
+            Storage::delete($category->image);
+            $category->delete();
+            $flasher->addSuccess('Your category has been delete!');
+            return redirect()->route('admin.categories.index');
+        }
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }
 
-        return redirect()->route('admin.categories.index');
     }
 }

@@ -35,6 +35,14 @@
                             class="block mb-2 text-sm font-medium text-gray-900">Description</label>
                         <textarea name="description" id="description" rows="3" placeholder="Leave a description..." class="block p-2.5 w-full text-sm text-gray-900 bg-slate-50 rounded-lg border-2 border-gray-300 focus:ring-indigo-500"></textarea>
                     </div>
+                    <!-- Price -->
+                    <div class="relative z-0 w-full mb-6 group">
+                        <input type="number" name="price" id="price" min="0.00" max="0.01"
+                            class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-500 peer"
+                            placeholder=" " required="">
+                        <label for="price"
+                            class="peer-focus:font-medium absolute text-lg text-gray-500 duration-300 transform -translate-y-6 scale-75 top-3 -z-10 origin-[0] peer-focus:left-0 peer-focus:text-indigo-500 peer-placeholder-shwon:scale-100 peer-placeholder-shown:translate-y-0 peer-focus:scale-75 peer-focus:-translate-y-6">Price</label>
+                    </div>
                     <div class="sm:col-span-6 pt-5">
                         <label for="categories" class="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
                         <select class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">

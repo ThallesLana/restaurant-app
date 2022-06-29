@@ -60,7 +60,7 @@
                                             class="px-4 py-2 bg-red-500 hover:bg-red-700 rounded-lg text-white">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" id="delete" onclick="jaraguetion({{ $category->id }})">Delete</button>
+                                            <button type="submit" id="delete">Delete</button>
                                         </form>
                                     </div>
                                 </td>
@@ -72,8 +72,8 @@
         </div>
     </div>
     <script>
-        function jaraguetion(id) {
-            alert(id);
+        function submitForm() {
+            return confirm('Rollback deletion of candidate table?');
         }
     </script>
 </x-admin-layout>
