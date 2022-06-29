@@ -29,7 +29,7 @@
                     <div>
                         <label for="image" class="block mb-2 text-sm font-medium text-gray-900">Upload Image</label>
                         <div>
-                            <img class="w-32 h-32" src="{{ Storage::url($category->image) }}">
+                            <img class="w-32 h-32 p-2" src="{{ Storage::url($category->image) }}">
                         </div>
                         <input type="file" id="image" name="image"
                             class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg p-1 cursor-pointer bg-slate-100 focus:outline-none">
