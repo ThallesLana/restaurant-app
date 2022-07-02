@@ -43,6 +43,7 @@ class MenuController extends Controller
     public function store(MenuStoreRequest $request, SweetAlertFactory $flasher)
     {
 
+        try{
             $image = $request->file('image')->store('public/menus');
 
             $menu = Menu::create([
@@ -59,12 +60,11 @@ class MenuController extends Controller
             $flasher->addSuccess('Your category has been create!');
             var_dump($menu);
             return redirect()->route('admin.menus.index');
-
-        /*try{ }
+        }
         catch(\Exception $e) {
             $flasher->addError('An error has occurred please try again later.');
             return redirect()->route('dashboard');
-        } */
+        }
     }
 
     /**
@@ -138,17 +138,21 @@ class MenuController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Menu $menu, SweetAlertFactory $flasher)
+    public function destroy(Menu $menu, Category $categories, Request $request, SweetAlertFactory $flasher)
     {
-        try {
-            Storage::delete($menu->image);
-            $menu->delete();
-            $flasher->addSuccess('Your menu has been delete!');
-            return redirect()->route('admin.menu.index');
+        Storage::delete($menu->image);
+        if($request->has('categories')){
+            $menu->categories()->detach($request->categories);
+        }
+        $menu->delete();
+        $flasher->addSuccess('Your menu has been delete!');
+        return redirect()->route('admin.menus.index');
+
+        /*try {
         }
         catch(\Exception $e) {
             $flasher->addError('An error has occurred please try again later.');
             return redirect()->route('dashboard');
-        }
+        } */
     }
 }
