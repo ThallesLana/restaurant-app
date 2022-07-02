@@ -720,6 +720,9 @@ select {
 .m-4 {
   margin: 1rem;
 }
+.m-6 {
+  margin: 1.5rem;
+}
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
