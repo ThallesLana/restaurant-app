@@ -50,10 +50,13 @@
                     </div>
                     <div class="sm:col-span-6 pt-5">
                         <label for="categories" class="block mb-2 text-sm font-medium text-gray-900">Select an option</label>
-                        <select id="categories" name="categories[]" class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
-                            <option selected="">Choose a category</option>
-                            @foreach ($categories as $category)
-                                <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        <select id="categories" name="categories[]" class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">                            
+                            @foreach ($categories as $category)   
+                                @if ($menu->id == $menu->categories->contains($category))
+                                    <option value="{{ $category->id }}" selected="{{ $category->id }}">{{ $category->name }}</option>
+                                @elseif ($menu->id !== $menu->categories->contains($category))
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endif
                             @endforeach
                         </select>
                     </div>

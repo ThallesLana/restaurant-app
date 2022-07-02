@@ -20,13 +20,13 @@
                                 Name
                             </th>
                             <th scope="col" class="px-6 py-3">
+                                Image
+                            </th>
+                            <th scope="col" class="px-6 py-3">
                                 Description
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Price
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Image
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 <span class="sr-only">Edit</span>
@@ -42,15 +42,15 @@
                             </td>
                             <td scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                {{ $menu->description }}
+                                <img src="{{ Storage::url($menu->image) }}" class="w-8 h-8 rounded">
+                            </td>
+                            <td scope="row"
+                                class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
+                                <p class="max-w-sm overflow-hidden text-ellipsis">{{ $menu->description }}</p> 
                             </td>
                             <td scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                 R$ {{ $menu->price }}
-                            </td>
-                            <td scope="row"
-                                class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                <img src="{{ Storage::url($menu->image) }}" class="w-8 h-8 rounded">
                             </td>
                             <td scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
