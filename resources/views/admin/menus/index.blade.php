@@ -7,6 +7,9 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <div class="font-bold text-indigo-500 text-5xl border-b-2 pb-2 border-indigo-300">
+                <h1>Menus</h1>
+            </div>
             <div class="flex justify-end m-2 p-2">
                 <a href="{{ route('admin.menus.create') }}" class="px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
                     New Menu
@@ -46,7 +49,7 @@
                             </td>
                             <td scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                <p class="max-w-sm overflow-hidden text-ellipsis">{{ $menu->description }}</p> 
+                                <p class="max-w-sm overflow-hidden text-ellipsis">{{ $menu->description }}</p>
                             </td>
                             <td scope="row"
                                 class="px-6 py-4 font-medium text-gray-900 dark:text-white whitespace-nowrap">
