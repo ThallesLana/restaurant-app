@@ -162,7 +162,6 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Flasher\Laravel\FlasherServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
