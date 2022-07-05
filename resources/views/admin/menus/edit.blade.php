@@ -17,7 +17,7 @@
                 <div class="relative overflow-x-auto shadow-md sm:rounded-lg bg-slate-200 w-4/6">
                     <div class="m-2 p-2">
                         <div class="font-bold text-indigo-500 text-xl border-b-2 pb-1 border-indigo-300 flex justify-center">
-                            <h1>Edit Menus</h1>
+                            <h1>Edit Menu</h1>
                         </div>
                         <form method="POST" action="{{ route('admin.menus.update', $menu) }}" enctype="multipart/form-data">
                             @csrf
