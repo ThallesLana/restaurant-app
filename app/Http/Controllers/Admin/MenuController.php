@@ -140,19 +140,18 @@ class MenuController extends Controller
      */
     public function destroy(Menu $menu, Category $categories, Request $request, SweetAlertFactory $flasher)
     {
-        Storage::delete($menu->image);
-        if($request->has('categories')){
-            $menu->categories()->detach($request->categories);
-        }
-        $menu->delete();
-        $flasher->addSuccess('Your menu has been delete!');
-        return redirect()->route('admin.menus.index');
-
-        /*try {
+        try {
+            Storage::delete($menu->image);
+            if($request->has('categories')){
+                $menu->categories()->detach($request->categories);
+            }
+            $menu->delete();
+            $flasher->addSuccess('Your menu has been delete!');
+            return redirect()->route('admin.menus.index');
         }
         catch(\Exception $e) {
             $flasher->addError('An error has occurred please try again later.');
             return redirect()->route('dashboard');
-        } */
+        }
     }
 }

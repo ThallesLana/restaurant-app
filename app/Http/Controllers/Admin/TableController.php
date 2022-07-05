@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\TableStoreRequest;
 use App\Models\Table;
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Illuminate\Http\Request;
 
 class TableController extends Controller
@@ -36,16 +37,23 @@ class TableController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(TableStoreRequest $request)
+    public function store(TableStoreRequest $request, SweetAlertFactory $flasher)
     {
-        Table::create([
-            'name' => $request->name,
-            'guest_number' => $request->guest_number,
-            'status' => $request->status,
-            'location' => $request->location
-        ]);
+        try {
+            Table::create([
+                'name' => $request->name,
+                'guest_number' => $request->guest_number,
+                'status' => $request->status,
+                'location' => $request->location
+            ]);
 
-        return redirect()->route('admin.tables.index');
+            $flasher->addSuccess('Your table has been create!');
+            return redirect()->route('admin.tables.index');
+        }
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -65,9 +73,9 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Table $table)
     {
-        //
+        return view('admin.tables.edit', compact('table'));
     }
 
     /**
@@ -77,9 +85,18 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(TableStoreRequest $request, Table $table, SweetAlertFactory $flasher)
     {
-        //
+        try {
+            $table->update($request->validated());
+            $flasher->addSuccess('Your table has been update!');
+            return redirect()->route('admin.tables.index');
+        }
+
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -88,8 +105,16 @@ class TableController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Table $table, SweetAlertFactory $flasher)
     {
-        //
+        try {
+            $table->delete();
+            $flasher->addSuccess('Your table has been delete!');
+            return redirect()->route('admin.tables.index');
+        }
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }
     }
 }
