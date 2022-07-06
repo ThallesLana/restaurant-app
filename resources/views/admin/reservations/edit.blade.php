@@ -19,12 +19,13 @@
                         <div class="font-bold text-indigo-500 text-xl border-b-2 pb-1 border-indigo-300 flex justify-center">
                             <h1>Edit Reservation</h1>
                         </div>
-                        <form method="POST" action="{{ route('admin.reservations.update') }}" enctype="multipart/form-data">
+                        <form method="POST" action="{{ route('admin.reservations.update', $reservation->id) }}" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="grid xl:grid-cols-2 xl:gap-6">
                                 <!-- First Name -->
                                 <div class="relative z-0 w-full mb-6 group mt-4">
-                                    <input type="text" name="first_name" id="first_name" required
+                                    <input type="text" name="first_name" id="first_name" required value="{{ $reservation->first_name }}"
                                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-500 peer"
                                         placeholder=" ">
                                     <label for="first_name"
@@ -32,7 +33,7 @@
                                 </div>
                                 <!-- Last Name -->
                                 <div class="relative z-0 w-full mb-6 group mt-4">
-                                    <input type="text" name="last_name" id="last_name" required
+                                    <input type="text" name="last_name" id="last_name" required value="{{ $reservation->last_name }}"
                                         class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-500 peer"
                                         placeholder=" ">
                                     <label for="last_name"
@@ -47,7 +48,7 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path><path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path></svg>
                                         </div>
-                                        <input type="email" name="email" id="email" required
+                                        <input type="email" name="email" id="email" required value="{{ $reservation->email }}"
                                             class="bg-slate-200 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5"
                                             placeholder="name@gmail.com" required="">
                                     </div>
@@ -59,7 +60,7 @@
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M511.2 387l-23.25 100.8c-3.266 14.25-15.79 24.22-30.46 24.22C205.2 512 0 306.8 0 54.5c0-14.66 9.969-27.2 24.22-30.45l100.8-23.25C139.7-2.602 154.7 5.018 160.8 18.92l46.52 108.5c5.438 12.78 1.77 27.67-8.98 36.45L144.5 207.1c33.98 69.22 90.26 125.5 159.5 159.5l44.08-53.8c8.688-10.78 23.69-14.51 36.47-8.975l108.5 46.51C506.1 357.2 514.6 372.4 511.2 387z"/></svg>
                                         </div>
-                                        <input type="tel" pattern="[0-9]{3}-[0-9]{5}-[0-9]{4}" name="tel_number" id="tel_number" required
+                                        <input type="tel" pattern="[0-9]{3}-[0-9]{5}-[0-9]{4}" name="tel_number" id="tel_number" required value="{{ $reservation->tel_number }}"
                                             class="bg-slate-200 border-2 border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5"
                                             placeholder="123-45678-9012" required="">
                                     </div>
@@ -80,7 +81,7 @@
                                             datepicker-autohide
                                             datepicker-title="Select date for reservation"
                                             datepicker-format="dd/mm/yyyy"
-                                            type="text" placeholder="Select date" id="res_date" name="res_date"
+                                            type="text" placeholder="Select date" id="res_date" name="res_date" value="{{ $reservation->res_date }}"
                                             class="bg-slate-100 border-2 cursor-pointer border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5 ">
                                     </div>
                                 </div>
@@ -91,7 +92,7 @@
                                         <select id="table_id" name="table_id" class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
                                             <option selected="">Choose a table</option>
                                             @foreach ($tables as $table)
-                                                <option value="{{ $table->id }}">{{ $table->name }}</option>
+                                                <option value="{{ $table->id }}" <?php if($reservation->table_id == $table->id){ ?> selected="{{ $reservation->table_id }}" <?php } ?> >{{ $table->name }}</option>
                                             @endforeach
                                         </select>
                                     </div>
@@ -100,7 +101,7 @@
 
                             <!-- Guest number -->
                             <div class="relative z-0 w-full mb-6">
-                                <input type="number" name="guest_number" id="guest_number" min="0" max="100" step="1" required
+                                <input type="number" name="guest_number" id="guest_number" min="0" max="100" step="1" required value="{{ $reservation->guest_number }}"
                                     class="block py-2.5 px-0 w-full text-sm text-gray-900 bg-transparent border-0 border-b-2 border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-indigo-500 peer"
                                     placeholder=" " required="">
                                 <label for="guest_number"

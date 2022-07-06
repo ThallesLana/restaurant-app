@@ -41,15 +41,15 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreRequest $request, SweetAlertFactory $flasher)
     {
-
+        try{
             Reservations::create($request->validated());
             $flasher->addSuccess('Your Reservation has been create!');
             return redirect()->route('admin.reservations.index');
-
-        /*catch(\Exception $e) {
+        }
+        catch(\Exception $e) {
             $flasher->addError('An error has occurred please try again later.');
             return redirect()->route('dashboard');
-        }*/
+        }
     }
 
     /**
@@ -69,9 +69,10 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Reservations $reservation)
     {
-        //
+        $tables = Table::all();
+        return view('admin.reservations.edit', compact('reservation', 'tables'));
     }
 
     /**
@@ -81,9 +82,18 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(ReservationStoreRequest $request, Reservations $reservation, SweetAlertFactory $flasher)
     {
-        //
+        try {
+            $reservation->update($request->validated());
+            $flasher->addSuccess('Your reservation has been update!');
+            return redirect()->route('admin.reservations.index');
+        }
+
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }
     }
 
     /**
@@ -92,8 +102,16 @@ class ReservationController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Reservations $reservation, SweetAlertFactory $flasher)
     {
-        //
+        try {
+            $reservation->delete();
+            $flasher->addSuccess('Your table has been delete!');
+            return redirect()->route('admin.reservations.index');
+        }
+        catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }
     }
 }
