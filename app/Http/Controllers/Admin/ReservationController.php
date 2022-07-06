@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\ReservationStoreRequest;
 use App\Models\Reservations;
+use App\Models\Table;
+use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Illuminate\Http\Request;
 
 class ReservationController extends Controller
@@ -26,7 +29,8 @@ class ReservationController extends Controller
      */
     public function create()
     {
-        return view('admin.reservations.create');
+        $tables = Table::all();
+        return view('admin.reservations.create', compact('tables'));
     }
 
     /**
@@ -35,9 +39,17 @@ class ReservationController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ReservationStoreRequest $request, SweetAlertFactory $flasher)
     {
-        //
+
+            Reservations::create($request->validated());
+            $flasher->addSuccess('Your Reservation has been create!');
+            return redirect()->route('admin.reservations.index');
+
+        /*catch(\Exception $e) {
+            $flasher->addError('An error has occurred please try again later.');
+            return redirect()->route('dashboard');
+        }*/
     }
 
     /**
