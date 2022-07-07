@@ -70,15 +70,13 @@
                                 {{-- Data --}}
                                 <div class="relative z-0 w-full group">
                                     <label for="res_date" class="block text-sm font-medium text-gray-900">Reservation Date</label>
-                                    <div class="relative z-0 w-full mb-6 mt-2 group">
+                                    <div class="z-0 w-full mb-6 mt-2 group">
                                         <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
                                             <svg class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd"></path></svg>
                                         </div>
                                         <input
                                             datepicker
-                                            datepicker-buttons
                                             datepicker-autohide
-                                            datepicker-title="Select date for reservation"
                                             datepicker-format="dd/mm/yyyy"
                                             type="text" placeholder="Select date" id="res_date" name="res_date"
                                             class="bg-slate-100 border-2 cursor-pointer border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5 ">
@@ -91,13 +89,12 @@
                                         <select id="table_id" name="table_id" class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
                                             <option selected="">Choose a table</option>
                                             @foreach ($tables as $table)
-                                                <option value="{{ $table->id }}">{{ $table->name }}</option>
+                                                <option value="{{ $table->id }}">{{ $table->name }} ({{ $table->guest_number }} guests)</option>
                                             @endforeach
                                         </select>
                                     </div>
                                 </div>
                             </div>
-
                             <!-- Guest number -->
                             <div class="relative z-0 w-full mb-6">
                                 <input type="number" name="guest_number" id="guest_number" min="0" max="100" step="1" required

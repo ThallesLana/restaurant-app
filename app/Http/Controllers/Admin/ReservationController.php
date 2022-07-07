@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ReservationStoreRequest;
 use App\Models\Reservations;
 use App\Models\Table;
+use Carbon\Carbon;
 use Flasher\SweetAlert\Prime\SweetAlertFactory;
 use Illuminate\Http\Request;
 
@@ -41,15 +42,27 @@ class ReservationController extends Controller
      */
     public function store(ReservationStoreRequest $request, SweetAlertFactory $flasher)
     {
-        try{
-            Reservations::create($request->validated());
-            $flasher->addSuccess('Your Reservation has been create!');
-            return redirect()->route('admin.reservations.index');
+        //try{}
+        // condição para numeros de guests nas mesas
+        $table = Table::findOrFail($request->table_id);
+        if ($request->guest_number > $table->guest_number) {
+            return back()->with('warning', 'Please choose the table base on guests.');
         }
-        catch(\Exception $e) {
+        // condição para mesa na data
+        $request_date = $request->res_date;
+
+            if ($request_date === $request->res_date and $table === $request->table_id ) {
+                return back()->with('warning', 'This table is reserved for this date.');
+            }
+
+
+        Reservations::create($request->validated());
+        $flasher->addSuccess('Your Reservation has been create!');
+        return redirect()->route('admin.reservations.index');
+        /*catch(\Exception $e) {
             $flasher->addError('An error has occurred please try again later.');
             return redirect()->route('dashboard');
-        }
+        }*/
     }
 
     /**
