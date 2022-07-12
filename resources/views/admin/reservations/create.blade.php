@@ -119,6 +119,6 @@
             </div>
         </div>
     </div>
-
     <script src="https://unpkg.com/flowbite@1.4.7/dist/datepicker.js"></script>
+    <script src="https://unpkg.com/flowbite@1.4.7/dist/flowbite.js"></script>
 </x-admin-layout>
