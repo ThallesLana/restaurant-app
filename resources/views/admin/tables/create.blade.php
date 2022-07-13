@@ -1,3 +1,17 @@
+<?php
+    $arrayTableLocation = array (
+        "Front" => "front",
+        "Inside" => "inside",
+        "Outside" => "outside"
+    );
+
+    $arrayTableStatus = array (
+        "Pending" => "pending",
+        "Avaliable" => "avaliable",
+        "Unavaliable" => "unavaliable"
+    );
+?>
+
 <x-admin-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
@@ -42,9 +56,10 @@
                                 <label for="status" class="block mb-2 text-sm font-medium text-gray-900">Select an option for status</label>
                                 <select id="status" name="status" class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
                                     <option selected="" value="NS">Choose a location</option>
-                                    @foreach ($tableStatus = array ( "Pending" => "pending", "Avaliable" => "avaliable", "Unavaliable" => "unavaliable"); as $status => $value)
+                                    @foreach ($arrayTableStatus as $status => $value)
                                         <option value="{{ $value }}">{{ $status }}</option>
                                     @endforeach
+
                                 </select>
                             </div>
                             {{-- Location --}}
@@ -52,7 +67,7 @@
                                 <label for="location" class="block mb-2 text-sm font-medium text-gray-900">Select an option for location</label>
                                 <select id="location" name="location" class="bg-slate-100 border-2 border-gray-300 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full p-2.5">
                                     <option selected="" value="NS">Choose a location</option>
-                                    @foreach ($tableLocation = array ( "Front" => "front", "Inside" => "inside", "Outside" => "outside"); as $location => $value)
+                                    @foreach ($arrayTableLocation as $location => $value)
                                         <option value="{{ $value }}">{{ $location }}</option>
                                     @endforeach
                                 </select>

@@ -77,9 +77,7 @@
                                         </div>
                                         <input
                                             datepicker
-                                            datepicker-buttons
                                             datepicker-autohide
-                                            datepicker-title="Select date for reservation"
                                             datepicker-format="dd/mm/yyyy"
                                             type="text" placeholder="Select date" id="res_date" name="res_date" value="{{ $reservation->res_date }}"
                                             class="bg-slate-100 border-2 cursor-pointer border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-indigo-500 focus:border-indigo-500 block w-full pl-10 p-2.5 ">
