@@ -48,13 +48,6 @@ class ReservationController extends Controller
         if ($request->guest_number > $table->guest_number) {
             return back()->with('warning', 'Please choose the table base on guests.');
         }
-        // condição para mesa na data
-        $request_date = $request->res_date;
-
-            if ($request_date === $request->res_date and $table === $request->table_id ) {
-                return back()->with('warning', 'This table is reserved for this date.');
-            }
-
 
         Reservations::create($request->validated());
         $flasher->addSuccess('Your Reservation has been create!');
