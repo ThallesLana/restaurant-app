@@ -15,6 +15,7 @@ class Reservations extends Model
         'email',
         'tel_number',
         'res_date',
+        'res_time',
         'table_id',
         'guest_number'
     ];
