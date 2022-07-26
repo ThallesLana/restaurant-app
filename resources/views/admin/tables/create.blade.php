@@ -73,7 +73,7 @@
                                 </select>
                             </div>
                             <div class="pt-5 pr-2 pb-0 pl-0.5 flex justify-between">
-                                <a href="{{ route('admin.menus.index') }}"
+                                <a href="{{ route('admin.tables.index') }}"
                                     class="flex justify-start px-4 py-2 bg-indigo-500 hover:bg-indigo-700 rounded-lg text-white">
                                     Return
                                 </a>
